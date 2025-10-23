@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>张笃韬 — 在线简历</title>
+<style>
+/* ===== 主题变量（可按需修改） ===== */
+:root{
+  --primary: #0072B2;   /* 标题/主色 */
+  --secondary: #ffffff;;  /* 次级强调 */
+  --accent:  #009E73;   /* 链接/标签 */
+  --alert:   #D55E00;   /* 高亮/警告 */
+  --muted:   #999999;   /* 次要文字 */
+  --bg:      #ffffff;   /* 背景 */
+  --card:    #ffffff;   /* 卡片 */
+  --text:    #222;      /* 主文案 */
+  --shadow:  0 8px 24px rgba(0,0,0,.08);
+  --radius:  16px;
+  --sidebar-w: 30%;
+  --content-w: 70%;
+  --gap: 28px;
+}
+
+/* ===== 基础 ===== */
+*{ box-sizing: border-box; }
+html, body { margin:0; padding:0; }
+body{
+  font-family: "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ===== 布局 ===== */
+.container{
+  display:flex;
+  max-width:1100px;
+  margin:32px auto;
+  background:var(--card);
+  box-shadow:var(--shadow);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.sidebar{
+  width:var(--sidebar-w);
+  background:var(--primary);
+  color:#fff;
+  padding:24px;
+}
+.sidebar h2{ margin:0 0 8px; }
+.sidebar p{ margin:6px 0; }
+.sidebar hr{
+  border:none; border-top:1px solid rgba(255,255,255,.25);
+  margin:16px 0;
+}
+.sidebar a{ color:#fff; text-decoration: underline; }
+.avatar{
+  width:120px; height:120px; border-radius:50%;
+  object-fit:cover; display:block; margin:0 auto 16px;
+}
+
+.content{
+  width:var(--content-w);
+  padding:var(--gap);
+}
+
+/* ===== 标题/卡片 ===== */
+h1,h2{ color:var(--primary); margin:0 0 12px; }
+h3{ color:var(--accent); margin:12px 0 6px; }
+a{ color:var(--accent); text-decoration:none; }
+a:hover{ color:var(--secondary); text-decoration:underline; }
+.card{
+  border:1px solid #eee; border-radius:12px;
+  padding:14px 16px; margin:12px 0; background:#fff;
+}
+
+/* ===== 标签页（Tabs） ===== */
+.tabs{
+  display:flex; gap:8px; margin-bottom:12px;
+  border-bottom:1px solid #eee; padding-bottom:6px;
+}
+.tab-btn{
+  appearance:none; border:none; background:transparent;
+  padding:10px 14px; border-radius:999px; cursor:pointer;
+  font-weight:bold; color:var(--muted);
+}
+.tab-btn[aria-selected="true"]{
+  color:#fff; background:var(--primary);
+}
+.tab-btn:focus{ outline:2px solid var(--secondary); outline-offset:2px; }
+
+/* 标签页内容容器 */
+.tabpanel{ display:none; }
+.tabpanel[data-active="true"]{ display:block; }
+
+/* 标签小芯片 */
+.tags{ list-style:none; padding:0; margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px; }
+.tags li{
+  font-size:12px; border:1px solid var(--accent);
+  padding:2px 8px; border-radius:999px;
+}
+
+/* 语言切换（可选） */
+.lang-switch{ text-align:right; margin-bottom:8px; }
+.lang-switch a{ color:var(--muted); }
+.lang-switch a:hover{ color:var(--accent); }
+
+/* ===== 响应式 ===== */
+@media (max-width: 900px){
+  .container{ flex-direction:column; }
+  .sidebar, .content{ width:100%; }
+}
+
+/* ===== 打印优化（可选） ===== */
+@media print{
+  .tabs{ border:none; }
+  .tab-btn{ display:none; }
+  .tabpanel{ display:block !important; } /* 打印时显示所有栏 */
+}
+</style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- 左侧栏 -->
+    <aside class="sidebar">
+      <!-- 可选头像：把 assets/avatar.jpg 换成你的头像路径 -->
+      <!-- <img src="assets/avatar.jpg" alt="Dutao Zhang" class="avatar"> -->
+      <h2>张笃韬</h2>
+      <p>AI / 大数据 / 机器学习</p>
+      <hr>
+      <h3>Contact</h3>
+      <p>Email：<a href="mailto:1062723732@qq.com">1062723732@qq.com</a></p>
+      <p>GitHub：<a href="https://github.com/zh19980811" target="_blank">github.com/zh19980811</a></p>
+      <p>Scholar：<a href="https://scholar.google.com.hk/citations?user=YZXleOYAAAAJ&hl=zh-CN" target="_blank">Google Scholar</a></p>
+      <p>证书仓库：<a href="https://github.com/zh19980811/-1" target="_blank">GitHub</a></p>
+      <hr>
+      <h3>Skills</h3>
+      <ul>
+        <li>Python / PyTorch / TensorFlow</li>
+        <li>GNN / XAI / SHAP / RAG</li>
+        <li>Pandas / SQL / SQLite / Linux</li>
+        <li>Unity3D / AutoCAD（MCP 集成）</li>
+      </ul>
+      <hr>
+      <h3>兴趣方向</h3>
+      <ul>
+        <li>个性化代码生成 / 智能体</li>
+        <li>检索增强与后处理</li>
+        <li>药物开发与图学习</li>
+        <li>Unity × AI 融合</li>
+      </ul>
+    </aside>
+
+    <!-- 右侧内容 -->
+    <main class="content">
+      <div class="lang-switch">
+        <!-- 可选：中英切换链接
+        <a href="index.html">中文</a> | <a href="index_en.html">EN</a> -->
+      </div>
+
+      <h1>在线简历</h1>
+
+      <!-- 标签页按钮 -->
+      <div class="tabs" role="tablist" aria-label="简历分栏">
+        <button id="tab-work" class="tab-btn" role="tab" aria-controls="panel-work"
+                aria-selected="true">工作 / 经历</button>
+        <button id="tab-pubs" class="tab-btn" role="tab" aria-controls="panel-pubs"
+                aria-selected="false">论文 / 专利</button>
+      </div>
+
+      <!-- 工作/经历 面板 -->
+      <section id="panel-work" class="tabpanel" role="tabpanel" aria-labelledby="tab-work" data-active="true">
+        <section>
+          <h2>个人概述</h2>
+          <p>
+            专注多模态、检索增强、图学习与可解释性（XAI），具备工程落地与竞赛经验；
+            海外学习与合作背景，能快速推进跨学科项目。
+          </p>
+        </section>
+
+        <section>
+          <h2>教育背景</h2>
+          <ul>
+            <li><strong>澳门理工大学</strong> — 人工智能药物开发（博士），2025.09–至今</li>
+            <li><strong>ITMO 大学</strong> — 大数据与机器学习（硕士），2023.09–2025.06</li>
+            <li><strong>东北电力大学</strong> — 能源与动力工程（本科），2016.09–2020.06</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>工作 / 研究经历</h2>
+
+          <article class="card">
+            <h3>科大讯飞北京研究院（实习 / 研究）</h3>
+            <p><em>2024.07–2024.12</em></p>
+            <ul>
+              <li>优化多模态图文模型 LLaVA 的分辨率与 OCR 能力；</li>
+              <li>修改前处理与底层逻辑（动态编码 + 张量对齐），在 invqa / docvqa 等任务测试；</li>
+              <li>产出：表格生成式语言模型的模型融合技术（专利交底）。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>西交利物浦大学（线上 RA）</h3>
+            <p><em>2025.07–至今</em></p>
+            <ul>
+              <li>用 Unity 搭建教学课堂模拟，构建师生在线问答情境；</li>
+              <li>预期：1 个可用项目 + 1 篇论文。</li>
+            </ul>
+          </article>
+        </section>
+
+        <section>
+          <h2>项目（精选）</h2>
+
+          <article class="card">
+            <h3><a href="https://github.com/zh19980811/Easy-MCP-AutoCad?tab=readme-ov-file" target="_blank">AutoCAD MCP 集成服务器开发</a></h3>
+            <p>基于 MCP 集成 AutoCAD 与 LLM，自然语言生成图纸、图层管理、元素扫描/高亮；SQLite 持久化。</p>
+            <ul class="tags"><li>Python</li><li>MCP</li><li>AutoCAD</li><li>LLM</li></ul>
+          </article>
+
+          <article class="card">
+            <h3><a href="https://github.com/zh19980811/-RAG-" target="_blank">图 RAG 技术</a></h3>
+            <p>OCR → 图结构化 → 图 RAG 检索与问答。</p>
+            <ul class="tags"><li>RAG</li><li>OCR</li><li>Graph</li></ul>
+          </article>
+
+          <article class="card">
+            <h3><a href="https://www.kaggle.com/competitions/qa-over-slides-searching-for-the-information" target="_blank">Kaggle 幻灯片 RAG 问答（F1 第 1）</a></h3>
+            <p>面向 SlideShare 的问答系统；方案已开源。</p>
+            <ul class="tags"><li>Kaggle</li><li>IR</li><li>RAG</li></ul>
+          </article>
+        </section>
+      </section>
+
+      <!-- 论文/专利 面板 -->
+      <section id="panel-pubs" class="tabpanel" role="tabpanel" aria-labelledby="tab-pubs" data-active="false" hidden>
+        <section>
+          <h2>论文 & 专利</h2>
+
+          <article class="card">
+            <h3>结构化文本：表格生成式语言模型的模型融合技术（专利）</h3>
+            <p>申请人：科大讯飞北京研究院（交底书定稿）</p>
+            <p>链接：<a href="https://github.com/zh19980811/Mtr-deplot" target="_blank">GitHub</a></p>
+          </article>
+
+          <article class="card">
+            <h3>外观专利：电脑桌（授权）</h3>
+            <p>授权公告号：CN305666394S（2020.03.31）</p>
+          </article>
+
+          <article class="card">
+            <h3>
+              <a href="https://arxiv.org/abs/2505.19442" target="_blank">
+                Style2Code: A Style-Controllable Code Generation Framework with Dual-Modal Contrastive Representation Learning
+              </a>（投递中，负责人）
+            </h3>
+            <p>多模态风格量化与融合；提升模型多功能性与准确性。
+              <a href="https://github.com/zh19980811/Style2Code" target="_blank">项目</a>
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Cross-Scale Modeling of Healthcare Norms...</h3>
+            <p>第二作者，医疗数据智能分析研究（EI 核心期刊）。</p>
+          </article>
+
+          <article class="card">
+            <h3>Style-Adaptive Optimization in Software Development Using MOE Structure</h3>
+            <p>JIEAS 2(5):33–38，2024/10/1。<a href="https://doi.org/10.5281/zenodo.13845335" target="_blank">DOI</a></p>
+          </article>
+        </section>
+      </section>
+    </main>
+  </div>
+
+<script>
+/* 轻量级标签切换 + 无障碍支持 + URL 记忆 */
+(function(){
+  const tabs = Array.from(document.querySelectorAll('.tab-btn'));
+  const panels = {
+    work: document.getElementById('panel-work'),
+    pubs: document.getElementById('panel-pubs')
+  };
+
+  function activate(key, pushHash=true){
+    // 切换按钮状态
+    tabs.forEach(btn=>{
+      const sel = (btn.id === 'tab-' + key);
+      btn.setAttribute('aria-selected', sel ? 'true' : 'false');
+    });
+    // 切换面板状态（含 hidden 属性，利于无障碍）
+    Object.entries(panels).forEach(([k, el])=>{
+      const active = (k === key);
+      el.dataset.active = active ? 'true' : 'false';
+      if(active){ el.removeAttribute('hidden'); } else { el.setAttribute('hidden',''); }
+    });
+    // 更新 URL hash
+    if(pushHash){
+      const h = '#' + key;
+      if(location.hash !== h) history.replaceState(null, '', h);
+    }
+  }
+
+  // 点击事件
+  tabs.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const key = btn.id.replace('tab-','');
+      activate(key);
+    });
+    // 键盘操作（Enter/Space 激活）
+    btn.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      // 左右箭头在两个 tab 间切换焦点
+      if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+        e.preventDefault();
+        const i = tabs.indexOf(btn);
+        const next = e.key === 'ArrowRight' ? (i+1)%tabs.length : (i-1+tabs.length)%tabs.length;
+        tabs[next].focus();
+      }
+    });
+  });
+
+  // 根据 hash 初始化
+  const initial = (location.hash||'').replace('#','');
+  if(initial === 'pubs' || initial === 'work'){
+    activate(initial, false);
+  } else {
+    activate('work', false);
+  }
+})();
+</script>
+</body>
+</html>
