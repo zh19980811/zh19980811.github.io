@@ -8,7 +8,7 @@
 /* ===== 主题变量（可按需修改） ===== */
 :root{
   --primary: #0072B2;   /* 标题/主色 */
-  --secondary: #ffffff;;  /* 次级强调 */
+  --secondary: #ffffff; /* 次级强调 */
   --accent:  #009E73;   /* 链接/标签 */
   --alert:   #D55E00;   /* 高亮/警告 */
   --muted:   #999999;   /* 次要文字 */
@@ -101,22 +101,52 @@ a:hover{ color:var(--secondary); text-decoration:underline; }
   padding:2px 8px; border-radius:999px;
 }
 
-/* 语言切换（可选） */
-.lang-switch{ text-align:right; margin-bottom:8px; }
-.lang-switch a{ color:var(--muted); }
-.lang-switch a:hover{ color:var(--accent); }
+/* ===== 语言切换（新增） ===== */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+.lang-toggle{
+  display:flex; gap:8px; align-items:center; justify-content:flex-end;
+}
+.lang-btn{
+  appearance:none;
+  border:1px solid #e7e7e7;
+  background:#fff;
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.lang-btn[aria-pressed="true"]{
+  background:var(--primary);
+  color:#fff;
+  border-color:transparent;
+}
+.lang-btn:focus{ outline:2px solid var(--accent); outline-offset:2px; }
+
+/* 显示控制：按语言显示/隐藏 */
+[data-lang]{ display:none; }
+html[data-lang="zh"] [data-lang="zh"]{ display:block; }
+html[data-lang="en"] [data-lang="en"]{ display:block; }
 
 /* ===== 响应式 ===== */
 @media (max-width: 900px){
   .container{ flex-direction:column; }
   .sidebar, .content{ width:100%; }
+  .topbar{ align-items:flex-start; }
 }
 
 /* ===== 打印优化（可选） ===== */
 @media print{
   .tabs{ border:none; }
   .tab-btn{ display:none; }
-  .tabpanel{ display:block !important; } /* 打印时显示所有栏 */
+  .tabpanel{ display:block !important; }
+  .lang-toggle{ display:none; }
 }
 </style>
 </head>
@@ -127,109 +157,233 @@ a:hover{ color:var(--secondary); text-decoration:underline; }
     <aside class="sidebar">
       <!-- 可选头像：把 assets/avatar.jpg 换成你的头像路径 -->
       <!-- <img src="assets/avatar.jpg" alt="Dutao Zhang" class="avatar"> -->
-      <h2>张笃韬</h2>
-      <p>AI / 大数据 / 机器学习</p>
+
+      <h2>
+        <span data-lang="zh">张笃韬</span>
+        <span data-lang="en">Dutao Zhang</span>
+      </h2>
+
+      <p>
+        <span data-lang="zh">AI / 大数据 / 机器学习</span>
+        <span data-lang="en">AI / Big Data / Machine Learning</span>
+      </p>
+
       <hr>
+
       <h3>Contact</h3>
       <p>Email：<a href="mailto:1062723732@qq.com">1062723732@qq.com</a></p>
-      <p>GitHub：<a href="https://github.com/zh19980811" target="_blank">github.com/zh19980811</a></p>
-      <p>Scholar：<a href="https://scholar.google.com.hk/citations?user=YZXleOYAAAAJ&hl=zh-CN" target="_blank">Google Scholar</a></p>
-      <p>证书仓库：<a href="https://github.com/zh19980811/-1" target="_blank">GitHub</a></p>
+      <p>GitHub：<a href="https://github.com/zh19980811" target="_blank" rel="noopener">github.com/zh19980811</a></p>
+      <p>Scholar：<a href="https://scholar.google.com.hk/citations?user=YZXleOYAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Google Scholar</a></p>
+      <p>
+        <span data-lang="zh">证书仓库：</span>
+        <span data-lang="en">Certificates：</span>
+        <a href="https://github.com/zh19980811/-1" target="_blank" rel="noopener">GitHub</a>
+      </p>
+
       <hr>
-      <h3>Skills</h3>
+
+      <h3>
+        <span data-lang="zh">Skills</span>
+        <span data-lang="en">Skills</span>
+      </h3>
       <ul>
         <li>Python / PyTorch / TensorFlow</li>
         <li>GNN / XAI / SHAP / RAG</li>
         <li>Pandas / SQL / SQLite / Linux</li>
-        <li>Unity3D / AutoCAD（MCP 集成）</li>
+        <li>
+          <span data-lang="zh">Unity3D / AutoCAD（MCP 集成）</span>
+          <span data-lang="en">Unity3D / AutoCAD (MCP integration)</span>
+        </li>
       </ul>
+
       <hr>
-      <h3>兴趣方向</h3>
+
+      <h3>
+        <span data-lang="zh">兴趣方向</span>
+        <span data-lang="en">Interests</span>
+      </h3>
       <ul>
-        <li>个性化代码生成 / 智能体</li>
-        <li>检索增强与后处理</li>
-        <li>药物开发与图学习</li>
-        <li>Unity × AI 融合</li>
+        <li>
+          <span data-lang="zh">个性化代码生成 / 智能体</span>
+          <span data-lang="en">Personalized code generation / Agents</span>
+        </li>
+        <li>
+          <span data-lang="zh">检索增强与后处理</span>
+          <span data-lang="en">Retrieval-augmented methods & post-processing</span>
+        </li>
+        <li>
+          <span data-lang="zh">药物开发与图学习</span>
+          <span data-lang="en">Drug discovery & graph learning</span>
+        </li>
+        <li>
+          <span data-lang="zh">Unity × AI 融合</span>
+          <span data-lang="en">Unity × AI integration</span>
+        </li>
       </ul>
     </aside>
 
     <!-- 右侧内容 -->
     <main class="content">
-      <div class="lang-switch">
-        <!-- 可选：中英切换链接
-        <a href="index.html">中文</a> | <a href="index_en.html">EN</a> -->
-      </div>
+      <!-- 顶部栏：标题 + 语言切换 -->
+      <div class="topbar">
+        <h1 style="margin:0;">
+          <span data-lang="zh">在线简历</span>
+          <span data-lang="en">Online Resume</span>
+        </h1>
 
-      <h1>在线简历</h1>
+        <div class="lang-toggle" role="group" aria-label="Language toggle">
+          <button id="btn-zh" class="lang-btn" type="button" aria-pressed="true">中文</button>
+          <button id="btn-en" class="lang-btn" type="button" aria-pressed="false">EN</button>
+        </div>
+      </div>
 
       <!-- 标签页按钮 -->
       <div class="tabs" role="tablist" aria-label="简历分栏">
         <button id="tab-work" class="tab-btn" role="tab" aria-controls="panel-work"
-                aria-selected="true">工作 / 经历</button>
+                aria-selected="true">
+          <span data-lang="zh">工作 / 经历</span>
+          <span data-lang="en">Experience</span>
+        </button>
         <button id="tab-pubs" class="tab-btn" role="tab" aria-controls="panel-pubs"
-                aria-selected="false">论文 / 专利</button>
+                aria-selected="false">
+          <span data-lang="zh">论文 / 专利</span>
+          <span data-lang="en">Publications / Patents</span>
+        </button>
       </div>
 
       <!-- 工作/经历 面板 -->
       <section id="panel-work" class="tabpanel" role="tabpanel" aria-labelledby="tab-work" data-active="true">
         <section>
-          <h2>个人概述</h2>
-          <p>
+          <h2>
+            <span data-lang="zh">个人概述</span>
+            <span data-lang="en">Summary</span>
+          </h2>
+
+          <p data-lang="zh">
             专注多模态、检索增强、图学习与可解释性（XAI），具备工程落地与竞赛经验；
             海外学习与合作背景，能快速推进跨学科项目。
+          </p>
+
+          <p data-lang="en">
+            Focused on multimodal learning, retrieval-augmented systems, graph learning, and explainability (XAI),
+            with strong engineering execution and competition experience. International study and collaboration
+            background, able to drive cross-disciplinary projects efficiently.
           </p>
         </section>
 
         <section>
-          <h2>教育背景</h2>
-          <ul>
+          <h2>
+            <span data-lang="zh">教育背景</span>
+            <span data-lang="en">Education</span>
+          </h2>
+
+          <ul data-lang="zh">
             <li><strong>澳门理工大学</strong> — 人工智能药物开发（博士），2025.09–至今</li>
             <li><strong>ITMO 大学</strong> — 大数据与机器学习（硕士），2023.09–2025.06</li>
             <li><strong>东北电力大学</strong> — 能源与动力工程（本科），2016.09–2020.06</li>
           </ul>
+
+          <ul data-lang="en">
+            <li><strong>Macau Polytechnic University</strong> — PhD, AI-Driven Drug Discovery, 2025.09–Present</li>
+            <li><strong>ITMO University</strong> — MSc, Big Data & Machine Learning, 2023.09–2025.06</li>
+            <li><strong>Northeast Electric Power University</strong> — BEng, Energy & Power Engineering, 2016.09–2020.06</li>
+          </ul>
         </section>
 
         <section>
-          <h2>工作 / 研究经历</h2>
+          <h2>
+            <span data-lang="zh">工作 / 研究经历</span>
+            <span data-lang="en">Work / Research</span>
+          </h2>
 
           <article class="card">
-            <h3>科大讯飞北京研究院（实习 / 研究）</h3>
-            <p><em>2024.07–2024.12</em></p>
-            <ul>
+            <h3>
+              <span data-lang="zh">科大讯飞北京研究院（实习 / 研究）</span>
+              <span data-lang="en">iFLYTEK Beijing Research Institute (Intern / Research)</span>
+            </h3>
+
+            <p><em>
+              <span data-lang="zh">2024.07–2024.12</span>
+              <span data-lang="en">2024.07–2024.12</span>
+            </em></p>
+
+            <ul data-lang="zh">
               <li>优化多模态图文模型 LLaVA 的分辨率与 OCR 能力；</li>
               <li>修改前处理与底层逻辑（动态编码 + 张量对齐），在 invqa / docvqa 等任务测试；</li>
               <li>产出：表格生成式语言模型的模型融合技术（专利交底）。</li>
             </ul>
+
+            <ul data-lang="en">
+              <li>Improved LLaVA’s effective resolution and OCR performance for multimodal document understanding.</li>
+              <li>Refactored preprocessing and low-level pipeline (dynamic encoding + tensor alignment), evaluated on invqa/docvqa.</li>
+              <li>Output: patent disclosure on model fusion techniques for table-generation LLMs.</li>
+            </ul>
           </article>
 
           <article class="card">
-            <h3>西交利物浦大学（线上 RA）</h3>
-            <p><em>2025.07–至今</em></p>
-            <ul>
+            <h3>
+              <span data-lang="zh">西交利物浦大学（线上 RA）</span>
+              <span data-lang="en">Xi’an Jiaotong-Liverpool University (Remote RA)</span>
+            </h3>
+
+            <p><em>
+              <span data-lang="zh">2025.07–至今</span>
+              <span data-lang="en">2025.07–Present</span>
+            </em></p>
+
+            <ul data-lang="zh">
               <li>用 Unity 搭建教学课堂模拟，构建师生在线问答情境；</li>
               <li>预期：1 个可用项目 + 1 篇论文。</li>
+            </ul>
+
+            <ul data-lang="en">
+              <li>Built a Unity-based classroom simulation to support teacher–student online Q&A scenarios.</li>
+              <li>Expected deliverables: 1 usable project + 1 paper.</li>
             </ul>
           </article>
         </section>
 
         <section>
-          <h2>项目（精选）</h2>
+          <h2>
+            <span data-lang="zh">项目（精选）</span>
+            <span data-lang="en">Selected Projects</span>
+          </h2>
 
           <article class="card">
-            <h3><a href="https://github.com/zh19980811/Easy-MCP-AutoCad?tab=readme-ov-file" target="_blank">AutoCAD MCP 集成服务器开发</a></h3>
-            <p>基于 MCP 集成 AutoCAD 与 LLM，自然语言生成图纸、图层管理、元素扫描/高亮；SQLite 持久化。</p>
+            <h3>
+              <a href="https://github.com/zh19980811/Easy-MCP-AutoCad?tab=readme-ov-file" target="_blank" rel="noopener">
+                <span data-lang="zh">AutoCAD MCP 集成服务器开发</span>
+                <span data-lang="en">AutoCAD MCP Integration Server</span>
+              </a>
+            </h3>
+
+            <p data-lang="zh">基于 MCP 集成 AutoCAD 与 LLM，自然语言生成图纸、图层管理、元素扫描/高亮；SQLite 持久化。</p>
+            <p data-lang="en">Integrated AutoCAD with LLM via MCP: natural-language drawing generation, layer management, entity scanning/highlighting; SQLite persistence.</p>
+
             <ul class="tags"><li>Python</li><li>MCP</li><li>AutoCAD</li><li>LLM</li></ul>
           </article>
 
           <article class="card">
-            <h3><a href="https://github.com/zh19980811/-RAG-" target="_blank">图 RAG 技术</a></h3>
-            <p>OCR → 图结构化 → 图 RAG 检索与问答。</p>
+            <h3>
+              <a href="https://github.com/zh19980811/-RAG-" target="_blank" rel="noopener">
+                <span data-lang="zh">图 RAG 技术</span>
+                <span data-lang="en">Graph RAG Pipeline</span>
+              </a>
+            </h3>
+            <p data-lang="zh">OCR → 图结构化 → 图 RAG 检索与问答。</p>
+            <p data-lang="en">OCR → graph structuring → graph-based RAG retrieval and QA.</p>
             <ul class="tags"><li>RAG</li><li>OCR</li><li>Graph</li></ul>
           </article>
 
           <article class="card">
-            <h3><a href="https://www.kaggle.com/competitions/qa-over-slides-searching-for-the-information" target="_blank">Kaggle 幻灯片 RAG 问答（F1 第 1）</a></h3>
-            <p>面向 SlideShare 的问答系统；方案已开源。</p>
+            <h3>
+              <a href="https://www.kaggle.com/competitions/qa-over-slides-searching-for-the-information" target="_blank" rel="noopener">
+                <span data-lang="zh">Kaggle 幻灯片 RAG 问答（F1 第 1）</span>
+                <span data-lang="en">Kaggle Slides RAG QA (Rank #1 by F1)</span>
+              </a>
+            </h3>
+            <p data-lang="zh">面向 SlideShare 的问答系统；方案已开源。</p>
+            <p data-lang="en">A QA system for SlideShare-style decks; solution open-sourced.</p>
             <ul class="tags"><li>Kaggle</li><li>IR</li><li>RAG</li></ul>
           </article>
         </section>
@@ -238,38 +392,67 @@ a:hover{ color:var(--secondary); text-decoration:underline; }
       <!-- 论文/专利 面板 -->
       <section id="panel-pubs" class="tabpanel" role="tabpanel" aria-labelledby="tab-pubs" data-active="false" hidden>
         <section>
-          <h2>论文 & 专利</h2>
-
-          <article class="card">
-            <h3>结构化文本：表格生成式语言模型的模型融合技术（专利）</h3>
-            <p>申请人：科大讯飞北京研究院（交底书定稿）</p>
-            <p>链接：<a href="https://github.com/zh19980811/Mtr-deplot" target="_blank">GitHub</a></p>
-          </article>
-
-          <article class="card">
-            <h3>外观专利：电脑桌（授权）</h3>
-            <p>授权公告号：CN305666394S（2020.03.31）</p>
-          </article>
+          <h2>
+            <span data-lang="zh">论文 & 专利</span>
+            <span data-lang="en">Publications & Patents</span>
+          </h2>
 
           <article class="card">
             <h3>
-              <a href="https://arxiv.org/abs/2505.19442" target="_blank">
-                Style2Code: A Style-Controllable Code Generation Framework with Dual-Modal Contrastive Representation Learning
-              </a>（投递中，负责人）
+              <span data-lang="zh">结构化文本：表格生成式语言模型的模型融合技术（专利）</span>
+              <span data-lang="en">Structured Text: Model Fusion for Table-Generation LLMs (Patent)</span>
             </h3>
-            <p>多模态风格量化与融合；提升模型多功能性与准确性。
-              <a href="https://github.com/zh19980811/Style2Code" target="_blank">项目</a>
+            <p data-lang="zh">申请人：科大讯飞北京研究院（交底书定稿）</p>
+            <p data-lang="en">Applicant: iFLYTEK Beijing Research Institute (patent disclosure finalized)</p>
+            <p>
+              <span data-lang="zh">链接：</span><span data-lang="en">Link: </span>
+              <a href="https://github.com/zh19980811/Mtr-deplot" target="_blank" rel="noopener">GitHub</a>
             </p>
           </article>
 
           <article class="card">
-            <h3>Cross-Scale Modeling of Healthcare Norms...</h3>
-            <p>第二作者，医疗数据智能分析研究（EI 核心期刊）。</p>
+            <h3>
+              <span data-lang="zh">外观专利：电脑桌（授权）</span>
+              <span data-lang="en">Design Patent: Computer Desk (Granted)</span>
+            </h3>
+            <p data-lang="zh">授权公告号：CN305666394S（2020.03.31）</p>
+            <p data-lang="en">Grant No.: CN305666394S (2020-03-31)</p>
           </article>
 
           <article class="card">
-            <h3>Style-Adaptive Optimization in Software Development Using MOE Structure</h3>
-            <p>JIEAS 2(5):33–38，2024/10/1。<a href="https://doi.org/10.5281/zenodo.13845335" target="_blank">DOI</a></p>
+            <h3>
+              <a href="https://arxiv.org/abs/2505.19442" target="_blank" rel="noopener">
+                Style2Code: A Style-Controllable Code Generation Framework with Dual-Modal Contrastive Representation Learning
+              </a>
+              <span data-lang="zh">（投递中，负责人）</span>
+              <span data-lang="en">(Under review, Lead)</span>
+            </h3>
+            <p data-lang="zh">
+              多模态风格量化与融合；提升模型多功能性与准确性。
+              <a href="https://github.com/zh19980811/Style2Code" target="_blank" rel="noopener">项目</a>
+            </p>
+            <p data-lang="en">
+              Multimodal style quantification and fusion to improve model versatility and accuracy.
+              <a href="https://github.com/zh19980811/Style2Code" target="_blank" rel="noopener">Project</a>
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>
+              <span data-lang="zh">Cross-Scale Modeling of Healthcare Norms...</span>
+              <span data-lang="en">Cross-Scale Modeling of Healthcare Norms...</span>
+            </h3>
+            <p data-lang="zh">第二作者，医疗数据智能分析研究（EI 核心期刊）。</p>
+            <p data-lang="en">Second author; intelligent analytics on healthcare data (EI-indexed journal).</p>
+          </article>
+
+          <article class="card">
+            <h3>
+              <span data-lang="zh">Style-Adaptive Optimization in Software Development Using MOE Structure</span>
+              <span data-lang="en">Style-Adaptive Optimization in Software Development Using MOE Structure</span>
+            </h3>
+            <p data-lang="zh">JIEAS 2(5):33–38，2024/10/1。<a href="https://doi.org/10.5281/zenodo.13845335" target="_blank" rel="noopener">DOI</a></p>
+            <p data-lang="en">JIEAS 2(5):33–38, 2024-10-01. <a href="https://doi.org/10.5281/zenodo.13845335" target="_blank" rel="noopener">DOI</a></p>
           </article>
         </section>
       </section>
@@ -277,7 +460,7 @@ a:hover{ color:var(--secondary); text-decoration:underline; }
   </div>
 
 <script>
-/* 轻量级标签切换 + 无障碍支持 + URL 记忆 */
+/* ============ Tabs: 轻量切换 + 无障碍支持 + URL hash 记忆 ============ */
 (function(){
   const tabs = Array.from(document.querySelectorAll('.tab-btn'));
   const panels = {
@@ -285,35 +468,29 @@ a:hover{ color:var(--secondary); text-decoration:underline; }
     pubs: document.getElementById('panel-pubs')
   };
 
-  function activate(key, pushHash=true){
-    // 切换按钮状态
+  function activateTab(key, pushHash=true){
     tabs.forEach(btn=>{
       const sel = (btn.id === 'tab-' + key);
       btn.setAttribute('aria-selected', sel ? 'true' : 'false');
     });
-    // 切换面板状态（含 hidden 属性，利于无障碍）
     Object.entries(panels).forEach(([k, el])=>{
       const active = (k === key);
       el.dataset.active = active ? 'true' : 'false';
       if(active){ el.removeAttribute('hidden'); } else { el.setAttribute('hidden',''); }
     });
-    // 更新 URL hash
     if(pushHash){
-      const h = '#' + key;
+      const h = '#tab=' + key;
       if(location.hash !== h) history.replaceState(null, '', h);
     }
   }
 
-  // 点击事件
   tabs.forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const key = btn.id.replace('tab-','');
-      activate(key);
+      activateTab(key);
     });
-    // 键盘操作（Enter/Space 激活）
     btn.addEventListener('keydown', (e)=>{
       if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
-      // 左右箭头在两个 tab 间切换焦点
       if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
         e.preventDefault();
         const i = tabs.indexOf(btn);
@@ -323,13 +500,76 @@ a:hover{ color:var(--secondary); text-decoration:underline; }
     });
   });
 
-  // 根据 hash 初始化
-  const initial = (location.hash||'').replace('#','');
-  if(initial === 'pubs' || initial === 'work'){
-    activate(initial, false);
-  } else {
-    activate('work', false);
+  // 解析 hash：支持 #tab=work 或 #tab=pubs
+  function readHashTab(){
+    const h = (location.hash || '').replace('#','');
+    const m = h.match(/(?:^|&)tab=(work|pubs)(?:&|$)/);
+    return m ? m[1] : null;
   }
+
+  const initTab = readHashTab();
+  activateTab(initTab || 'work', false);
+
+  // hash 改变时同步（可选）
+  window.addEventListener('hashchange', ()=>{
+    const t = readHashTab();
+    if(t) activateTab(t, false);
+  });
+})();
+
+/* ============ Language: 中/英切换 + localStorage 记忆 + hash 支持 ============ */
+(function(){
+  const STORAGE_KEY = 'resume_lang';
+  const btnZh = document.getElementById('btn-zh');
+  const btnEn = document.getElementById('btn-en');
+
+  function setLang(lang, persist=true, pushHash=true){
+    const safe = (lang === 'en') ? 'en' : 'zh';
+    document.documentElement.setAttribute('data-lang', safe);
+    document.documentElement.setAttribute('lang', safe === 'en' ? 'en' : 'zh-CN');
+
+    btnZh.setAttribute('aria-pressed', safe === 'zh' ? 'true' : 'false');
+    btnEn.setAttribute('aria-pressed', safe === 'en' ? 'true' : 'false');
+
+    if(persist){
+      try{ localStorage.setItem(STORAGE_KEY, safe); }catch(e){}
+    }
+
+    // 合并到 hash：保留 tab=xxx，同时写入 lang=xx
+    if(pushHash){
+      const h = (location.hash || '').replace('#','');
+      const params = new URLSearchParams(h ? h.split('&') : []);
+      params.set('lang', safe);
+      // 如果之前 hash 不是 param 风格，也会被统一成 param 风格
+      history.replaceState(null, '', '#' + params.toString());
+    }
+  }
+
+  function readHashLang(){
+    const h = (location.hash || '').replace('#','');
+    const params = new URLSearchParams(h ? h.split('&') : []);
+    const v = params.get('lang');
+    return (v === 'en' || v === 'zh') ? v : null;
+  }
+
+  function readStoredLang(){
+    try{
+      const v = localStorage.getItem(STORAGE_KEY);
+      return (v === 'en' || v === 'zh') ? v : null;
+    }catch(e){ return null; }
+  }
+
+  btnZh.addEventListener('click', ()=> setLang('zh', true, true));
+  btnEn.addEventListener('click', ()=> setLang('en', true, true));
+
+  // 初始化优先级：hash > localStorage > 默认 zh
+  const initLang = readHashLang() || readStoredLang() || 'zh';
+  setLang(initLang, false, false);
+
+  window.addEventListener('hashchange', ()=>{
+    const l = readHashLang();
+    if(l) setLang(l, false, false);
+  });
 })();
 </script>
 </body>
